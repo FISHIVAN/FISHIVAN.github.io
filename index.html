@@ -679,12 +679,16 @@
             }
 
             section {
-                height: auto !important; /* Allow content to dictate height */
-                min-height: 100vh;
-                padding: 4rem 1rem;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
+                height: auto !important;
+                min-height: 0; /* Remove full height constraint */
+                padding: 1rem 1rem; /* Reduce padding significantly */
+                display: block;
+            }
+
+            /* Add specific spacing for the first section (Hero) */
+            section#home {
+                padding-top: 5rem;
+                padding-bottom: 1rem;
             }
             
             .project-container {
@@ -694,7 +698,7 @@
                 width: 100%;
                 border-radius: 20px;
                 transform: none !important;
-                margin-bottom: 2rem;
+                margin-bottom: 1.5rem;
                 background: rgba(16, 28, 50, 0.85); /* Slightly darker for better contrast */
             }
 
@@ -757,32 +761,38 @@
             }
 
             .gallery-grid {
-                padding: 0 1rem;
+                padding: 0 max(1rem, calc((100% - 85%) / 2)); /* Ensure perfect centering */
                 gap: 1rem;
+                scroll-padding: 0 max(1rem, calc((100% - 85%) / 2));
             }
             
             .gallery-item {
-                flex: 0 0 90%; /* Show part of next item */
+                flex: 0 0 85%; /* Slightly narrower to ensure previous/next hints are visible and centering works */
                 margin-right: 0;
+                scroll-snap-align: center;
+                scroll-snap-stop: always;
             }
             
             .gallery-item img {
                 border-radius: 8px;
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
             }
 
             .hero-title { 
-                font-size: 2.2rem;
+                font-size: 2rem;
                 line-height: 1.3;
                 padding: 0;
-                margin-bottom: 2rem;
+                margin-bottom: 1rem;
             }
             
             .hero-content {
-                padding: 3rem 1.5rem;
+                padding: 2rem 1.5rem;
                 width: 100%;
                 background: rgba(10, 25, 47, 0.5);
                 backdrop-filter: blur(5px);
-                margin-top: 2rem;
+                margin-top: 0;
             }
 
             .nav-btn {
