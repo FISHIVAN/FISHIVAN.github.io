@@ -687,121 +687,164 @@
 
             /* Add specific spacing for the first section (Hero) */
             section#home {
-                padding-top: 5rem;
-                padding-bottom: 1rem;
+                padding-top: 3rem; /* Reduced top padding */
+                padding-bottom: 0; /* No bottom padding needed */
+                min-height: auto; /* Allow it to be as short as content */
+                height: auto !important;
             }
-            
+
             .project-container {
                 flex-direction: column;
                 max-height: none !important;
                 height: auto !important;
                 width: 100%;
-                border-radius: 20px;
+                border-radius: 24px;
                 transform: none !important;
-                margin-bottom: 1.5rem;
-                background: rgba(16, 28, 50, 0.85); /* Slightly darker for better contrast */
+                margin-bottom: 2rem;
+                background: rgba(16, 28, 50, 0.7); /* More transparent for glass effect */
+                backdrop-filter: blur(12px); /* Strong blur for exquisite feel */
+                -webkit-backdrop-filter: blur(12px);
+                border: 1px solid rgba(255, 255, 255, 0.08); /* Subtle border */
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
                 opacity: 1 !important; /* Force visible on mobile */
+                overflow: hidden;
             }
 
+            /* Magic Trick: Unwrap .project-info to interleave its children with visuals */
+            .project-info {
+                display: contents; 
+            }
+
+            /* Reorder Elements */
+            /* 1. Header (Title + Tags) */
+            .project-header {
+                order: 1;
+                width: 100%;
+                border-bottom: none;
+                padding: 1.5rem 1.5rem 1rem 1.5rem;
+                margin-bottom: 0;
+                background: transparent;
+            }
+
+            /* 2. Visuals (Images) */
             .project-visuals {
-                order: -1;
+                order: 2;
                 flex: none;
-                height: 300px; /* Fixed height for visuals */
+                height: auto;
+                aspect-ratio: 16/10; /* Fixed aspect ratio container */
+                width: 100%;
                 padding: 0;
                 border-left: none;
-                border-bottom: 1px solid var(--glass-border);
-                background: rgba(0,0,0,0.2);
-            }
-
-            .project-info {
-                flex: none;
-                padding: 2rem 1.5rem;
-                overflow: visible !important;
-            }
-
-            .project-title {
-                font-size: 2rem;
-                margin-bottom: 0.8rem;
-                text-align: center;
-            }
-
-            .project-header {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                border-bottom: 1px solid var(--glass-border);
-                padding-bottom: 1rem;
-                margin-bottom: 1.5rem;
-            }
-
-            .tech-stack {
-                justify-content: center;
-                gap: 0.6rem;
-            }
-
-            .tech-tag {
-                font-size: 0.8rem;
-                padding: 0.3rem 0.8rem;
-            }
-
-            .project-desc {
-                font-size: 1rem;
-                margin-bottom: 1.5rem;
-                text-align: justify;
-            }
-
-            .features-list li {
-                font-size: 0.95rem;
-                padding-left: 1.5rem;
+                border-bottom: none;
+                background: transparent;
                 margin-bottom: 1rem;
             }
 
-            .features-list li::before {
-                font-size: 1.1rem;
-                top: 0;
+            /* 3. Description & Features */
+            .project-desc {
+                order: 3;
+                padding: 0 1.5rem;
+                margin-bottom: 1.5rem;
+                font-size: 0.95rem;
+                color: #b0c4de;
             }
 
+            .features-list {
+                order: 4;
+                padding: 0 1.5rem; /* Remove extra left padding from container */
+                margin-bottom: 1.5rem;
+            }
+            
+            .features-list li {
+                font-size: 0.9rem;
+                padding-left: 1.2rem; /* Make space for the icon */
+                margin-bottom: 0.8rem;
+                position: relative; /* Ensure context for absolute icon */
+                line-height: 1.5; /* Improve readability */
+            }
+
+            .features-list li::before {
+                font-size: 0.8rem; /* Smaller icon */
+                top: 0.1rem; /* Adjust vertical alignment */
+                left: 0; /* Align strictly to left */
+            }
+
+            /* 4. Button */
+            .github-btn {
+                order: 5;
+                width: auto; /* Allow content to dictate width */
+                min-width: 200px; /* Minimum clickable area */
+                max-width: 80%; /* Prevent touching edges */
+                margin: 0 auto 2rem auto; /* Center horizontally */
+                padding: 0.8rem 1.5rem; /* Reduced vertical padding */
+                text-align: center;
+                font-size: 0.9rem; /* Refined font size */
+                border-radius: 50px; /* Pill shape for modern feel */
+                background: rgba(100, 255, 218, 0.05); /* Subtle background */
+                backdrop-filter: blur(5px);
+                display: flex; /* Ensure centering works */
+                justify-content: center;
+            }
+
+            /* Styling Refinements */
+            .project-title {
+                font-size: 1.8rem;
+                margin-bottom: 0.5rem;
+                text-align: left; /* Align left for cleaner look */
+            }
+
+            .tech-stack {
+                justify-content: flex-start; /* Align left */
+                gap: 0.5rem;
+            }
+
+            .tech-tag {
+                font-size: 0.75rem;
+                padding: 0.25rem 0.6rem;
+                background: rgba(100, 255, 218, 0.1);
+                border-color: rgba(100, 255, 218, 0.15);
+            }
+
+            /* Gallery Tweaks for Mobile */
             .gallery-grid {
-                padding: 0;
-                gap: 0; /* No gap between full width items */
-                scroll-padding: 0;
+                padding: 0 1rem;
+                gap: 0.5rem;
             }
             
             .gallery-item {
-                flex: 0 0 100%; /* Full width */
-                margin-right: 0;
-                scroll-snap-align: center;
-                scroll-snap-stop: always;
-                padding: 0 1rem; /* Internal padding for image */
-            }
-            
-            .gallery-item img {
-                border-radius: 8px;
-                width: 100%;
-                height: 100%;
-                object-fit: contain;
-                filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3)); /* Slightly softer shadow */
+                flex: 0 0 100%;
+                padding: 0 0.5rem;
+                border-radius: 12px;
+                overflow: hidden;
             }
 
-            .hero-title { 
-                font-size: 2.2rem; /* Increased size for emphasis */
-                line-height: 1.3;
-                padding: 0;
-                margin-bottom: 2rem; /* More space below title */
-                font-weight: 800;
+            .gallery-item img {
+                border-radius: 12px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             }
-            
+
             .hero-content {
-                padding: 3rem 1.5rem;
+                padding: 1rem 0; /* Remove horizontal padding, reduce vertical */
                 width: 100%;
-                background: rgba(10, 25, 47, 0.6);
-                backdrop-filter: blur(8px);
+                background: transparent; /* Remove background */
+                backdrop-filter: none; /* Remove blur */
                 margin-top: 0;
-                border-radius: 16px;
-                border: 1px solid rgba(255, 255, 255, 0.05);
+                border-radius: 0;
+                border: none; /* Remove border */
+                box-shadow: none; /* Remove shadow */
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+                text-align: center;
+            }
+
+            .hero-title { 
+                font-size: 2rem;
+                line-height: 1.3;
+                padding: 0;
+                margin-bottom: 1.5rem;
+                font-weight: 800;
+                text-shadow: 0 0 15px rgba(100, 255, 218, 0.3); /* Enhance text visibility without bg */
             }
 
             .profile-link {
