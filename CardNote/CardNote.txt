@@ -1,0 +1,35 @@
+CardNote 是一款基于 Android 平台的现代化卡片式笔记应用，采用简洁优雅的卡片 UI 设计，帮助用户高效记录灵感、待办事项和重要内容。项目完全使用 Kotlin 语言开发，基于 Jetpack Compose 构建原生 UI，并采用 MVVM 架构模式，在开发过程中大量使用前沿的创新Ai辅助编程工具辅助开发。
+ 
+核心功能 (Features)
+ 
+1. 卡片管理增删改查 (CRUD) ：支持创建新卡片、编辑内容、删除卡片。
+横向浏览 ：主界面采用横向滑动的分页交互，提供流畅的浏览体验。
+搜索功能 ：支持通过关键字快速检索笔记内容。
+2. 多样化样式 (Styles)提供 4 种预设卡片样式，满足不同记录需求：
+标准 (Title + Content) ：经典的标题加正文布局。
+纯文本 (Content Only) ：专注于内容的极简模式。
+居中 (Center Title) ：适合简短语录或标题展示。
+图片 (Image + Content) ：图文混排模式。
+个性化配色 ：支持为每张卡片单独设置背景颜色，提供多种柔和色调。
+3. 多媒体支持 (Media)图片处理 ：支持从相册选择图片插入笔记。
+图片裁切 ：内置图片裁切工具，支持多种比例调整。
+大图查看 ：支持点击图片进行全屏查看，配备平滑的淡入淡出动画。
+4. 个性化设置 (Settings)主题切换 ：支持跟随系统、强制浅色或强制深色模式。
+ 
+技术栈 (Tech Stack)
+ 
+语言 : Kotlin
+UI 框架 : Jetpack Compose (Material3 Design)
+架构模式 : MVVM (Model-View-ViewModel)
+依赖注入 : Hilt
+本地存储 :
+Room Database : 用于存储笔记数据。
+DataStore Preferences : 用于存储应用设置（如主题偏好）。
+图片加载 : Coil
+异步处理 : Kotlin Coroutines & Flow
+最低兼容 : Android 13 (API Level 33)
+ 
+项目亮点
+现代化 UI : 全面拥抱 Material Design 3 设计规范。
+流畅动画 : 在卡片切换、删除、图片查看等交互中大量使用了 Compose 动画 API (AnimatedVisibility, animate*AsState 等)，带来细腻的用户体验。
+手势交互 : 深度集成了手势操作，如长按编辑、点击查看大图等。
