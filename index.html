@@ -1162,13 +1162,39 @@
 
         // Touch Events (Mobile)
         let touchStartY = 0;
+        let lastTouchY = 0;
+
         window.addEventListener('touchstart', (e) => {
             touchStartY = e.touches[0].clientY;
+            lastTouchY = touchStartY;
         }, { passive: false });
 
         window.addEventListener('touchmove', (e) => {
-             // Prevent default refresh or bounce on mobile
-             // e.preventDefault(); // Careful with this, it disables all scroll
+            const currentY = e.touches[0].clientY;
+            const diff = lastTouchY - currentY;
+            
+            // Determine direction: Drag Up (Y decreases) -> Scroll Down -> Direction 1
+            const direction = diff > 0 ? 1 : -1;
+            
+            // Check if we are scrolling an internal element
+            let target = e.target;
+            let isInternalScroll = false;
+            
+            while (target && target !== document.body && target !== mainContainer) {
+                // Reuse isElementScrollable logic to check if the element can be scrolled in this direction
+                if (isElementScrollable(target, direction)) {
+                    isInternalScroll = true;
+                    break;
+                }
+                target = target.parentElement;
+            }
+
+            if (!isInternalScroll) {
+                // If not scrolling an internal element, prevent default to stop page bounce
+                e.preventDefault();
+            }
+            
+            lastTouchY = currentY;
         }, { passive: false });
 
         window.addEventListener('touchend', (e) => {
@@ -1205,7 +1231,11 @@
             isScrolling = true;
             currentSectionIndex = index;
             
-            mainContainer.style.transform = `translateY(-${currentSectionIndex * 100}vh)`;
+            // Use dvh on mobile to match CSS height, vh on desktop
+            const isMobile = window.innerWidth <= 968 || window.matchMedia('(max-aspect-ratio: 1/1)').matches;
+            const unit = isMobile ? 'dvh' : 'vh';
+            
+            mainContainer.style.transform = `translateY(-${currentSectionIndex * 100}${unit})`;
 
             // Trigger animations manually since IntersectionObserver might be lazy
             const currentSection = sections[currentSectionIndex];
